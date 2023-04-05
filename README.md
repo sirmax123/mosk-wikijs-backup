@@ -21,5 +21,5 @@
 
 4. В браузере: http://127.0.0.1:80/
 
-  login: superadmin@no-such-domain.tld
-  password: superadmin
+  login: `superadmin@no-such-domain.tld`
+  password: `superadmin`
