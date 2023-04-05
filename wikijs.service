@@ -1,0 +1,20 @@
+[Unit]
+Description=WikiJs MOSK Lab
+After=network.target
+
+[Service]
+SyslogIdentifier=wikijs-mosk-lab
+Restart=always
+RestartSec=60
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/usr/local/wiki.js
+ExecStart=/bin/bash -c "docker-compose up"
+ExecStop=/bin/bash -c "docker-compose down"
+
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target
+
