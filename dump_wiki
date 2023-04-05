@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -eu${DEBUG:+x}
+
+WORKDIR="/usr/local/wiki.js"
+DUMPFILE="wikibackup.dump"
+LOGFILE="/var/log/wikijs_dump.log"
+ERRFILE="/var/log/wikijs_dump.err"
+BRANCH="master"
+{
+    cd ${WORKDIR}
+    docker-compose  \
+        exec db \
+        pg_dump wiki -U wikijs  -F c > ${DUMPFILE}
+    # Check if dump result file exist has non-zero size:
+    if [ -s ${DUMPFILE} ];
+    then
+        git add ${DUMPFILE}
+        git commit -m "Backup: ${DUMPFILE} $(date)"
+        git push origin ${BRANCH}
+    else
+        echo "DUMP (${DUMPFILE}) not exist or has zero size." 1>&2
+    fi
+} > /var/log/wikijs_dump.log 2>/var/log/wikijs_dump.err
