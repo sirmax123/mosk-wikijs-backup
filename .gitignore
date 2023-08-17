@@ -1,0 +1,4 @@
+elastisearch_data/*
+elastisearch_data
+postgresql_data/
+postgresql_data/*
