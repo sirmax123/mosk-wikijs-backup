@@ -37,3 +37,13 @@ services:
     restart: "no"
     volumes:
       - ./elastisearch_data:/usr/share/elasticsearch/data
+  nginx:
+    image: nginx:latest
+    depends_on:
+      - wiki
+    restart: "always"
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx_config/conf.d:/etc/nginx/conf.d
+      - ./nginx_config/htpasswd.users:/etc/nginx/htpasswd.users

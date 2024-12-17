@@ -2,3 +2,5 @@ elastisearch_data/*
 elastisearch_data
 postgresql_data/
 postgresql_data/*
+docker-compose.yaml.1
+htpasswd.users
